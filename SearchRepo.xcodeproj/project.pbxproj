@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AA11722B25D1480A007C25E4 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11722A25D1480A007C25E4 /* Repository.swift */; };
+		AA11723025D14BCB007C25E4 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11722F25D14BCB007C25E4 /* CollectionView.swift */; };
+		AA11723325D1519E007C25E4 /* LoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11723225D1519E007C25E4 /* LoadMoreCell.swift */; };
+		AA11723725D16E35007C25E4 /* Saira-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA11723625D16E35007C25E4 /* Saira-Regular.ttf */; };
 		AA2CE98E25D0078B00266C54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2CE98C25D0078B00266C54 /* Assets.xcassets */; };
 		AA2CE99825D007F400266C54 /* OAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2CE99725D007F400266C54 /* OAuthClient.swift */; };
 		AA2CE99E25D0083500266C54 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2CE99D25D0083500266C54 /* HttpClient.swift */; };
@@ -36,6 +39,9 @@
 
 /* Begin PBXFileReference section */
 		AA11722A25D1480A007C25E4 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		AA11722F25D14BCB007C25E4 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
+		AA11723225D1519E007C25E4 /* LoadMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreCell.swift; sourceTree = "<group>"; };
+		AA11723625D16E35007C25E4 /* Saira-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Saira-Regular.ttf"; sourceTree = "<group>"; };
 		AA2CE98C25D0078B00266C54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA2CE99725D007F400266C54 /* OAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthClient.swift; sourceTree = "<group>"; };
 		AA2CE99D25D0083500266C54 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
@@ -89,6 +95,7 @@
 			children = (
 				AAA54C8925D04AA300A22799 /* RepositoryNameCell.swift */,
 				AAA54C9725D050D700A22799 /* RepositroryDescriptionCell.swift */,
+				AA11723225D1519E007C25E4 /* LoadMoreCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -141,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				AA2CE9AF25D008E600266C54 /* Encodable.swift */,
+				AA11722F25D14BCB007C25E4 /* CollectionView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -222,6 +230,7 @@
 		AAA54C9F25D053FB00A22799 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				AA11723625D16E35007C25E4 /* Saira-Regular.ttf */,
 				AAA54C9A25D053F500A22799 /* Exo2-Regular.ttf */,
 			);
 			path = Fonts;
@@ -304,6 +313,7 @@
 				AA2CE98E25D0078B00266C54 /* Assets.xcassets in Resources */,
 				AAA54C9C25D053F600A22799 /* Exo2-Regular.ttf in Resources */,
 				AA2CE9B525D0095F00266C54 /* LaunchScreen.storyboard in Resources */,
+				AA11723725D16E35007C25E4 /* Saira-Regular.ttf in Resources */,
 				AA2CE9D525D01A6100266C54 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +327,7 @@
 			files = (
 				AAA54CB125D0645800A22799 /* API.swift in Sources */,
 				AAA54C8A25D04AA300A22799 /* RepositoryNameCell.swift in Sources */,
+				AA11723325D1519E007C25E4 /* LoadMoreCell.swift in Sources */,
 				AAA54C7925D0403D00A22799 /* Auth.swift in Sources */,
 				AA2CE9D425D01A6100266C54 /* LoginViewController.swift in Sources */,
 				AA448FDC25CE8C91003C7EF6 /* AppDelegate.swift in Sources */,
@@ -335,6 +346,7 @@
 				AA2CE9A825D0087D00266C54 /* DeepLinkHandler.swift in Sources */,
 				AAA54CAB25D061CB00A22799 /* Search.swift in Sources */,
 				AAA54C8725D048E800A22799 /* RepositoriesViewController.swift in Sources */,
+				AA11723025D14BCB007C25E4 /* CollectionView.swift in Sources */,
 				AA2CE99825D007F400266C54 /* OAuthClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

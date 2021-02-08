@@ -10,6 +10,7 @@ import SafariServices
 
 class RepositoriesViewController: UIViewController {
     let loader = RepositoryLoader()
+    var loadMoreText = "Click to load more data"
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -33,6 +34,9 @@ class RepositoriesViewController: UIViewController {
         let queryString: String = query.replacingOccurrences(of: " ", with: "")
         if queryString.count > 0{
             self.navigationItem.title = "Search: \(query)"
+            self.loader.entries = []
+            self.collectionView.reloadData()
+            
             self.loader.load(query) {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -45,7 +49,7 @@ class RepositoriesViewController: UIViewController {
         let alert = UIAlertController(title: "Search", message: nil, preferredStyle: UIAlertController.Style.alert)
         alert.addTextField { (textField) in
             textField.placeholder = "Enter search query"
-                    
+            
         }
         
         let searchAction = UIAlertAction(title: "Search", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
@@ -61,6 +65,7 @@ class RepositoriesViewController: UIViewController {
         super.viewDidLoad()
         collectionView.register(RepositoryNameCell.self, forCellWithReuseIdentifier: "RepositoryNameCell")
         collectionView.register(RepositoryDescriptionCell.self, forCellWithReuseIdentifier: "RepositoryDescriptionCell")
+        collectionView.register(LoadMoreCell.self, forCellWithReuseIdentifier: "LoadMoreCell")
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -78,23 +83,44 @@ class RepositoriesViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension RepositoriesViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        if loader.entries.count == 0 {
+            self.collectionView.setEmptyMessage(loader.isLoading ? "Loading...": "Nothing to show :(", color: .white)
+        } else {
+            self.collectionView.restore()
+        }
+        if loader.entries.count > 0 && loader.canLoadNext{
+            return loader.entries.count + 1
+        }
         return loader.entries.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == loader.entries.count {
+            return 1
+        }
         return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = indexPath.item == 0 ? "RepositoryNameCell" : "RepositoryDescriptionCell"
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-        let entry = loader.entries[indexPath.section]
-        if let cell = cell as? RepositoryNameCell {
-            cell.label.text = "\(entry.full_name) (stars: \(entry.stargazers_count))"
-        } else if let cell = cell as? RepositoryDescriptionCell {
-            cell.label.text = entry.description
+        if indexPath.section == loader.entries.count{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LoadMoreCell", for: indexPath)
+            if let cell = cell as? LoadMoreCell{
+                cell.label.text = loadMoreText
+            }
+            return cell
         }
-        return cell
+        else {
+            let identifier = indexPath.item == 0 ? "RepositoryNameCell" : "RepositoryDescriptionCell"
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+            let entry = loader.entries[indexPath.section]
+            if let cell = cell as? RepositoryNameCell {
+                cell.label.text = "\(entry.full_name) (stars: \(entry.stargazers_count))"
+            } else if let cell = cell as? RepositoryDescriptionCell {
+                cell.label.text = entry.description
+            }
+            return cell
+        }
     }
 }
 
@@ -102,21 +128,37 @@ extension RepositoriesViewController: UICollectionViewDataSource {
 extension RepositoriesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width
-        if indexPath.item == 0 {
+        
+        if indexPath.section == loader.entries.count {
+            return LoadMoreCell.cellSize(width: width, text: self.loadMoreText)
+        } else if indexPath.item == 0 {
             return CGSize(width: width, height: 30)
         } else {
             let entry = loader.entries[indexPath.section]
-            return RepositoryDescriptionCell.cellSize(width: width, text: entry.description ?? "")
+            return RepositoryDescriptionCell.cellSize(width: width, text: entry.getShortDescription() ?? "")
         }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
-        let repository = loader.entries[indexPath.section]
-        
-        let safariVC = SFSafariViewController(url: URL(string: repository.html_url)!)
-        safariVC.modalPresentationStyle = .fullScreen
-        present(safariVC, animated: true, completion: nil)
+        if indexPath.section == loader.entries.count{
+            let cell = collectionView.cellForItem(at: indexPath)
+            if let cell = cell as? LoadMoreCell{
+                cell.startAnimating()
+            }
+            loader.loadNextPage {
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+            //load more data
+        } else {
+            let repository = loader.entries[indexPath.section]
+            
+            let safariVC = SFSafariViewController(url: URL(string: repository.html_url)!)
+            safariVC.modalPresentationStyle = .fullScreen
+            present(safariVC, animated: true, completion: nil)
+        }
     }
 }
 

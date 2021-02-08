@@ -17,7 +17,7 @@ class RepositoryDescriptionCell: UICollectionViewCell {
   let label: UILabel = {
     let label = UILabel()
     label.backgroundColor = .clear
-    label.numberOfLines = 0
+    label.numberOfLines = 5
     label.font = RepositoryDescriptionCell.font
     label.textColor = .white
     return label
