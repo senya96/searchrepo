@@ -44,7 +44,10 @@ class LoginViewController: UIViewController {
                                                   preferredStyle: .alert)
 
                     alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
-                    self.present(alert, animated: true)
+                    let nav = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
+                    nav.pushViewController(RepositoriesViewController(), animated: false)
+                    nav.modalPresentationStyle = .fullScreen
+                    self.present(nav, animated: true)
                 case .failure:
                     let alert = UIAlertController(title: "Something went wrong :(",
                                                   message: "Authentication error",
