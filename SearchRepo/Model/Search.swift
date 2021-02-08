@@ -32,7 +32,7 @@ struct SearchModel: Encodable{
 struct SearchResponse: Decodable{
     let totalCount: Int
     let incomplete_results: Bool
-    let items: [Repository]
+    let items: [RepositoryModel]
     
     
     private enum CodingKeys: String, CodingKey {

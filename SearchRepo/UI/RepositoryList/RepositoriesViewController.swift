@@ -25,7 +25,6 @@ class RepositoriesViewController: UIViewController {
     }()
     
     func setupNavigationBar(){
-        
         self.navigationItem.title = "Repositories"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.search, target: self, action: #selector(pushSearchBarButtonAction(_:)))
@@ -158,6 +157,16 @@ extension RepositoriesViewController: UICollectionViewDelegateFlowLayout {
             }
         } else {
             let repository = loader.getEntries()[indexPath.section]
+            
+            let repo = Repository.getRepositoryBy(repository.html_url)
+            if let repo = repo{
+                repo.history?.date = Date()
+                try? CoreDataManager.sharedInstance.managedObjectContext.save()
+            }
+            else {
+                let newRepo = Repository.newRepository(name: repository.full_name, url: repository.html_url, repo_description: repository.description ?? "")
+                _ = History.newHistory(repository: newRepo)
+            }
             
             let safariVC = SFSafariViewController(url: URL(string: repository.html_url)!)
             safariVC.modalPresentationStyle = .fullScreen

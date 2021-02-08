@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D64" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="History" representedClassName="History" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="repository" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repository" inverseName="history" inverseEntity="Repository"/>
+    </entity>
+    <entity name="Repository" representedClassName="Repository" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="repo_description" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="History" inverseName="repository" inverseEntity="History"/>
+    </entity>
+    <elements>
+        <element name="Repository" positionX="-45" positionY="45" width="128" height="89"/>
+        <element name="History" positionX="-18" positionY="99" width="128" height="59"/>
+    </elements>
+</model>

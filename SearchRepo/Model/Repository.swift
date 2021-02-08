@@ -7,7 +7,7 @@
 
 
 
-struct Repository: Decodable{
+struct RepositoryModel: Decodable{
     let full_name: String
     let description: String?
     let stargazers_count: Int

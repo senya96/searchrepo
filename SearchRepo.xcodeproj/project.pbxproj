@@ -11,6 +11,11 @@
 		AA11723025D14BCB007C25E4 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11722F25D14BCB007C25E4 /* CollectionView.swift */; };
 		AA11723325D1519E007C25E4 /* LoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11723225D1519E007C25E4 /* LoadMoreCell.swift */; };
 		AA11723725D16E35007C25E4 /* Saira-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA11723625D16E35007C25E4 /* Saira-Regular.ttf */; };
+		AA11723B25D1A704007C25E4 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11723A25D1A704007C25E4 /* CoreDataManager.swift */; };
+		AA11726225D1B4CC007C25E4 /* Repository+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11725E25D1B4CC007C25E4 /* Repository+CoreDataClass.swift */; };
+		AA11726325D1B4CC007C25E4 /* Repository+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11725F25D1B4CC007C25E4 /* Repository+CoreDataProperties.swift */; };
+		AA11726425D1B4CC007C25E4 /* History+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11726025D1B4CC007C25E4 /* History+CoreDataClass.swift */; };
+		AA11726525D1B4CC007C25E4 /* History+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11726125D1B4CC007C25E4 /* History+CoreDataProperties.swift */; };
 		AA2CE98E25D0078B00266C54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2CE98C25D0078B00266C54 /* Assets.xcassets */; };
 		AA2CE99825D007F400266C54 /* OAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2CE99725D007F400266C54 /* OAuthClient.swift */; };
 		AA2CE99E25D0083500266C54 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2CE99D25D0083500266C54 /* HttpClient.swift */; };
@@ -42,6 +47,11 @@
 		AA11722F25D14BCB007C25E4 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		AA11723225D1519E007C25E4 /* LoadMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreCell.swift; sourceTree = "<group>"; };
 		AA11723625D16E35007C25E4 /* Saira-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Saira-Regular.ttf"; sourceTree = "<group>"; };
+		AA11723A25D1A704007C25E4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		AA11725E25D1B4CC007C25E4 /* Repository+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Repository+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AA11725F25D1B4CC007C25E4 /* Repository+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Repository+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AA11726025D1B4CC007C25E4 /* History+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "History+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AA11726125D1B4CC007C25E4 /* History+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "History+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AA2CE98C25D0078B00266C54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA2CE99725D007F400266C54 /* OAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthClient.swift; sourceTree = "<group>"; };
 		AA2CE99D25D0083500266C54 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
@@ -98,6 +108,19 @@
 				AA11723225D1519E007C25E4 /* LoadMoreCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		AA11723D25D1A9F9007C25E4 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				AA11725E25D1B4CC007C25E4 /* Repository+CoreDataClass.swift */,
+				AA11725F25D1B4CC007C25E4 /* Repository+CoreDataProperties.swift */,
+				AA11726025D1B4CC007C25E4 /* History+CoreDataClass.swift */,
+				AA11726125D1B4CC007C25E4 /* History+CoreDataProperties.swift */,
+				AA448FE425CE8C91003C7EF6 /* SearchRepo.xcdatamodeld */,
+				AA11723A25D1A704007C25E4 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		AA2CE99025D007A600266C54 /* UI */ = {
@@ -172,6 +195,7 @@
 		AA448FDA25CE8C91003C7EF6 /* SearchRepo */ = {
 			isa = PBXGroup;
 			children = (
+				AA11723D25D1A9F9007C25E4 /* CoreData */,
 				AAA54CAF25D0644800A22799 /* API */,
 				AAA54CA925D061B900A22799 /* Model */,
 				AAA54C9F25D053FB00A22799 /* Fonts */,
@@ -185,7 +209,6 @@
 				AA2CE98C25D0078B00266C54 /* Assets.xcassets */,
 				AA448FDB25CE8C91003C7EF6 /* AppDelegate.swift */,
 				AA448FDD25CE8C91003C7EF6 /* SceneDelegate.swift */,
-				AA448FE425CE8C91003C7EF6 /* SearchRepo.xcdatamodeld */,
 				AA448FFC25CE91B7003C7EF6 /* Resources */,
 			);
 			path = SearchRepo;
@@ -331,11 +354,16 @@
 				AAA54C7925D0403D00A22799 /* Auth.swift in Sources */,
 				AA2CE9D425D01A6100266C54 /* LoginViewController.swift in Sources */,
 				AA448FDC25CE8C91003C7EF6 /* AppDelegate.swift in Sources */,
+				AA11726325D1B4CC007C25E4 /* Repository+CoreDataProperties.swift in Sources */,
+				AA11723B25D1A704007C25E4 /* CoreDataManager.swift in Sources */,
 				AA11722B25D1480A007C25E4 /* Repository.swift in Sources */,
 				AAA54C9125D04B5900A22799 /* TextSize.swift in Sources */,
+				AA11726425D1B4CC007C25E4 /* History+CoreDataClass.swift in Sources */,
 				AA448FDE25CE8C91003C7EF6 /* SceneDelegate.swift in Sources */,
+				AA11726225D1B4CC007C25E4 /* Repository+CoreDataClass.swift in Sources */,
 				AA448FE625CE8C91003C7EF6 /* SearchRepo.xcdatamodeld in Sources */,
 				AA2CE9AC25D008BC00266C54 /* AppDependeciesContainer.swift in Sources */,
+				AA11726525D1B4CC007C25E4 /* History+CoreDataProperties.swift in Sources */,
 				AA2CE99E25D0083500266C54 /* HttpClient.swift in Sources */,
 				AAA54C9825D050D700A22799 /* RepositroryDescriptionCell.swift in Sources */,
 				AAA54C9425D04CC700A22799 /* RepositoriesLoader.swift in Sources */,

@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        //navigationController?.setNavigationBarHidden(true, animated: true)
         oAuthService.onAuthenticationResult = { [weak self] in self?.onAuthenticationResult(result: $0) }
     }
     
@@ -38,16 +38,13 @@ class LoginViewController: UIViewController {
         DispatchQueue.main.async {
             self.presentedViewController?.dismiss(animated: true) {
                 switch result {
-                case .success(let tokenBag):
-                    let alert = UIAlertController(title: "Token",
-                                                  message: tokenBag.accessToken,
-                                                  preferredStyle: .alert)
-
-                    alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
-                    let nav = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
-                    nav.pushViewController(RepositoriesViewController(), animated: false)
-                    nav.modalPresentationStyle = .fullScreen
-                    self.present(nav, animated: true)
+                case .success( _):
+                    let vc = RepositoriesViewController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                    //self.navigationController?.modalPresentationStyle = .fullScreen
+                    //self.present(nav, animated: true)
                 case .failure:
                     let alert = UIAlertController(title: "Something went wrong :(",
                                                   message: "Authentication error",

@@ -19,11 +19,11 @@ class RepositoryLoader{
     private var isFirstThreadLoading = false
     private var isSecondThreadLoading = false
     
-    private var entries: [Repository] = []
-    private var firstThreadResult: [Repository] = []
-    private var secondThreadResult: [Repository] = []
+    private var entries: [RepositoryModel] = []
+    private var firstThreadResult: [RepositoryModel] = []
+    private var secondThreadResult: [RepositoryModel] = []
     
-    func getEntries() -> [Repository]{
+    func getEntries() -> [RepositoryModel]{
         return entries + firstThreadResult + secondThreadResult
     }
     
