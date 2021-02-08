@@ -11,6 +11,7 @@ import SafariServices
 class RepositoriesViewController: UIViewController {
     let loader = RepositoryLoader()
     var loadMoreText = "Click to load more data"
+    private var loadMoreIsEnabled = true
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -34,7 +35,7 @@ class RepositoriesViewController: UIViewController {
         let queryString: String = query.replacingOccurrences(of: " ", with: "")
         if queryString.count > 0{
             self.navigationItem.title = "Search: \(query)"
-            self.loader.entries = []
+            self.loader.clean()
             self.collectionView.reloadData()
             
             self.loader.load(query) {
@@ -84,26 +85,26 @@ class RepositoriesViewController: UIViewController {
 extension RepositoriesViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
-        if loader.entries.count == 0 {
+        if loader.getEntries().count == 0 {
             self.collectionView.setEmptyMessage(loader.isLoading ? "Loading...": "Nothing to show :(", color: .white)
         } else {
             self.collectionView.restore()
         }
-        if loader.entries.count > 0 && loader.canLoadNext{
-            return loader.entries.count + 1
+        if loader.getEntries().count > 0 && loader.canLoadNext{
+            return loader.getEntries().count + 1
         }
-        return loader.entries.count
+        return loader.getEntries().count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == loader.entries.count {
+        if section == loader.getEntries().count {
             return 1
         }
         return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == loader.entries.count{
+        if indexPath.section == loader.getEntries().count{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LoadMoreCell", for: indexPath)
             if let cell = cell as? LoadMoreCell{
                 cell.label.text = loadMoreText
@@ -113,7 +114,7 @@ extension RepositoriesViewController: UICollectionViewDataSource {
         else {
             let identifier = indexPath.item == 0 ? "RepositoryNameCell" : "RepositoryDescriptionCell"
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-            let entry = loader.entries[indexPath.section]
+            let entry = loader.getEntries()[indexPath.section]
             if let cell = cell as? RepositoryNameCell {
                 cell.label.text = "\(entry.full_name) (stars: \(entry.stargazers_count))"
             } else if let cell = cell as? RepositoryDescriptionCell {
@@ -129,31 +130,34 @@ extension RepositoriesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width
         
-        if indexPath.section == loader.entries.count {
+        if indexPath.section == loader.getEntries().count {
             return LoadMoreCell.cellSize(width: width, text: self.loadMoreText)
         } else if indexPath.item == 0 {
             return CGSize(width: width, height: 30)
         } else {
-            let entry = loader.entries[indexPath.section]
+            let entry = loader.getEntries()[indexPath.section]
             return RepositoryDescriptionCell.cellSize(width: width, text: entry.getShortDescription() ?? "")
         }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
-        if indexPath.section == loader.entries.count{
-            let cell = collectionView.cellForItem(at: indexPath)
-            if let cell = cell as? LoadMoreCell{
-                cell.startAnimating()
-            }
-            loader.loadNextPage {
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
+        if indexPath.section == loader.getEntries().count{
+            if loadMoreIsEnabled{
+                loadMoreIsEnabled = false
+                let cell = collectionView.cellForItem(at: indexPath)
+                if let cell = cell as? LoadMoreCell{
+                    cell.startAnimating()
+                }
+                loader.loadNextPage {
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                        self.loadMoreIsEnabled = true
+                    }
                 }
             }
-            //load more data
         } else {
-            let repository = loader.entries[indexPath.section]
+            let repository = loader.getEntries()[indexPath.section]
             
             let safariVC = SFSafariViewController(url: URL(string: repository.html_url)!)
             safariVC.modalPresentationStyle = .fullScreen

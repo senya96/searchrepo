@@ -88,6 +88,7 @@ class RemoteOAuthClient: OAuthClient {
         httpClient.performRequest(request: httpRequest) { (result: Result<TokenResponse, HTTPClient.RequestError>) in
             switch result {
             case .success(let response):
+                API.shared.setAuthorizationToken(response.accessToken)
                 completion(.success(TokenBag(accessToken: response.accessToken)))
             case .failure(let error):
                 completion(.failure(error))

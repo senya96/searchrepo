@@ -9,38 +9,81 @@ import Foundation
 
 
 class RepositoryLoader{
-    var entries: [Repository] = []
     var search: SearchModel?
     var canLoadNext = true
-    var per_page = 30
-    var isLoading = false
+    var isLoading: Bool{
+        get{
+            isFirstThreadLoading || isSecondThreadLoading
+        }
+    }
+    private var isFirstThreadLoading = false
+    private var isSecondThreadLoading = false
+    
+    private var entries: [Repository] = []
+    private var firstThreadResult: [Repository] = []
+    private var secondThreadResult: [Repository] = []
+    
+    func getEntries() -> [Repository]{
+        return entries + firstThreadResult + secondThreadResult
+    }
+    
+    func clean(){
+        entries = []
+        firstThreadResult = []
+        secondThreadResult = []
+    }
     
     func loadNextPage(completionHandler: @escaping () -> Void){
-        isLoading = true
-        self.search?.page += 1
-        API.shared.search(self.search!, successHandler: {searchResponse in
-            self.isLoading = false
-            self.entries += searchResponse.items
-            self.canLoadNext = searchResponse.totalCount != self.entries.count
-            completionHandler()
-        }, failureHandler: {requestError in
-            self.isLoading = false
-            completionHandler()
-        })
+       if self.search == nil || isLoading{
+            return
+        }
+        search!.page += 1
+        var thread1Search = search!
+        thread1Search.per_page = Int(search!.per_page / 2)
+        thread1Search.page = 2 * search!.page - 1
+        var thread2Search = search!
+        thread2Search.per_page = thread1Search.per_page
+        thread2Search.page = 2 * search!.page
+        entries += firstThreadResult + secondThreadResult
+        firstThreadResult = []
+        secondThreadResult = []
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.isFirstThreadLoading = true
+            API.shared.search(thread1Search, successHandler: {searchResponse in
+                self.firstThreadResult = searchResponse.items
+                self.canLoadNext = searchResponse.totalCount != self.getEntries().count
+                completionHandler()
+                self.isFirstThreadLoading = false
+            }, failureHandler: {requestError in
+                completionHandler()
+                self.isFirstThreadLoading = false
+            })
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.isSecondThreadLoading = true
+            API.shared.search(thread2Search, successHandler: {searchResponse in
+                self.secondThreadResult = searchResponse.items
+                self.canLoadNext = searchResponse.totalCount != self.getEntries().count
+                completionHandler()
+                self.isSecondThreadLoading = false
+            }, failureHandler: {requestError in
+                completionHandler()
+                self.isSecondThreadLoading = false
+                print("fail page: \(thread2Search.page)")
+            })
+        }
+        
     }
     
     func load(_ searchQuery: String, completionHandler: @escaping () -> Void){
-        self.isLoading = true
-        self.search = SearchModel(query: searchQuery, page: 1)
-        API.shared.search(self.search!, successHandler: {searchResponse in
-            self.isLoading = false
-            self.entries = searchResponse.items
-            self.canLoadNext = searchResponse.totalCount != self.entries.count
-            completionHandler()
-        }, failureHandler: {requestError in
-            self.isLoading = false
-            self.entries = []
-            completionHandler()
-        })
+        self.search = SearchModel(query: searchQuery, page: 0)
+        
+        entries = []
+        firstThreadResult = []
+        secondThreadResult = []
+        
+        loadNextPage(completionHandler: completionHandler)
     }
 }
