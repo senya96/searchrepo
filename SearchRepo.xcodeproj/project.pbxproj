@@ -16,6 +16,7 @@
 		AA11726325D1B4CC007C25E4 /* Repository+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11725F25D1B4CC007C25E4 /* Repository+CoreDataProperties.swift */; };
 		AA11726425D1B4CC007C25E4 /* History+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11726025D1B4CC007C25E4 /* History+CoreDataClass.swift */; };
 		AA11726525D1B4CC007C25E4 /* History+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11726125D1B4CC007C25E4 /* History+CoreDataProperties.swift */; };
+		AA11726E25D1B949007C25E4 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11726D25D1B949007C25E4 /* HistoryViewController.swift */; };
 		AA2CE98E25D0078B00266C54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2CE98C25D0078B00266C54 /* Assets.xcassets */; };
 		AA2CE99825D007F400266C54 /* OAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2CE99725D007F400266C54 /* OAuthClient.swift */; };
 		AA2CE99E25D0083500266C54 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2CE99D25D0083500266C54 /* HttpClient.swift */; };
@@ -52,6 +53,7 @@
 		AA11725F25D1B4CC007C25E4 /* Repository+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Repository+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AA11726025D1B4CC007C25E4 /* History+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "History+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AA11726125D1B4CC007C25E4 /* History+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "History+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AA11726D25D1B949007C25E4 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		AA2CE98C25D0078B00266C54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA2CE99725D007F400266C54 /* OAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthClient.swift; sourceTree = "<group>"; };
 		AA2CE99D25D0083500266C54 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
@@ -123,9 +125,18 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		AA11726C25D1B932007C25E4 /* HistoryList */ = {
+			isa = PBXGroup;
+			children = (
+				AA11726D25D1B949007C25E4 /* HistoryViewController.swift */,
+			);
+			path = HistoryList;
+			sourceTree = "<group>";
+		};
 		AA2CE99025D007A600266C54 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				AA11726C25D1B932007C25E4 /* HistoryList */,
 				AAA54C7C25D043B600A22799 /* Login */,
 				AA11722725D1463A007C25E4 /* RepositoryList */,
 			);
@@ -348,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA11726E25D1B949007C25E4 /* HistoryViewController.swift in Sources */,
 				AAA54CB125D0645800A22799 /* API.swift in Sources */,
 				AAA54C8A25D04AA300A22799 /* RepositoryNameCell.swift in Sources */,
 				AA11723325D1519E007C25E4 /* LoadMoreCell.swift in Sources */,

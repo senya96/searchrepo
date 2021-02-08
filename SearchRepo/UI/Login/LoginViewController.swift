@@ -21,7 +21,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //navigationController?.setNavigationBarHidden(true, animated: true)
         oAuthService.onAuthenticationResult = { [weak self] in self?.onAuthenticationResult(result: $0) }
     }
     
@@ -34,6 +33,12 @@ class LoginViewController: UIViewController {
         present(safariVC, animated: true, completion: nil)
     }
     
+    @IBAction func onHistoryClick(_ sender: Any) {
+        let vc = HistoryViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func onAuthenticationResult(result: Result<TokenBag, Error>) {
         DispatchQueue.main.async {
             self.presentedViewController?.dismiss(animated: true) {
@@ -42,9 +47,6 @@ class LoginViewController: UIViewController {
                     let vc = RepositoriesViewController()
                     vc.modalPresentationStyle = .fullScreen
                     self.navigationController?.pushViewController(vc, animated: true)
-                    
-                    //self.navigationController?.modalPresentationStyle = .fullScreen
-                    //self.present(nav, animated: true)
                 case .failure:
                     let alert = UIAlertController(title: "Something went wrong :(",
                                                   message: "Authentication error",

@@ -16,9 +16,9 @@ extension Repository {
         return NSFetchRequest<Repository>(entityName: "Repository")
     }
 
-    @NSManaged public var name: String?
+    @NSManaged public var name: String
     @NSManaged public var repo_description: String?
-    @NSManaged public var url: String?
+    @NSManaged public var url: String
     @NSManaged public var history: History?
 
 }

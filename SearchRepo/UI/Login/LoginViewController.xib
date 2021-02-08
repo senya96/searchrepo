@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Kwe-Mm-QHe">
-                    <rect key="frame" x="79" y="295" width="256" height="306"/>
+                    <rect key="frame" x="79" y="250" width="256" height="396.5"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="AhY-i5-U1Q">
                             <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
@@ -34,6 +34,22 @@
                             <state key="normal" title="Login"/>
                             <connections>
                                 <action selector="onLoginClick:" destination="-1" eventType="touchUpInside" id="cY0-Nw-ImX"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRM-B3-vtC">
+                            <rect key="frame" x="0.0" y="326" width="256" height="20.5"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hea-Hg-XQy" userLabel="History">
+                            <rect key="frame" x="0.0" y="366.5" width="256" height="30"/>
+                            <color key="backgroundColor" systemColor="systemBlueColor"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Show history"/>
+                            <connections>
+                                <action selector="onHistoryClick:" destination="-1" eventType="touchUpInside" id="2vk-3K-nNd"/>
                             </connections>
                         </button>
                     </subviews>

@@ -39,4 +39,14 @@ public class Repository: NSManagedObject {
 
         return nil
     }
+    
+    func getShortDescription(_ numOfCharacters: Int = 100) -> String?{
+        guard let description = self.repo_description else { return nil }
+        if description.count > numOfCharacters{
+            let lastIndex = description.index(description.startIndex, offsetBy: 100)
+            let substr = String(description[description.startIndex...lastIndex])
+            return "\(substr)..."
+        }
+        return description
+    }
 }
