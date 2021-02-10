@@ -170,12 +170,12 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		AA2CE9AA25D0089500266C54 /* Dependencies */ = {
+		AA2CE9AA25D0089500266C54 /* AppDependencies */ = {
 			isa = PBXGroup;
 			children = (
 				AA2CE9AB25D008BC00266C54 /* AppDependeciesContainer.swift */,
 			);
-			path = Dependencies;
+			path = AppDependencies;
 			sourceTree = "<group>";
 		};
 		AA2CE9AE25D008CD00266C54 /* Extensions */ = {
@@ -213,7 +213,7 @@
 				AAA54C8C25D04AF400A22799 /* Systems */,
 				AAA54C7725D0402500A22799 /* Configs */,
 				AA2CE9AE25D008CD00266C54 /* Extensions */,
-				AA2CE9AA25D0089500266C54 /* Dependencies */,
+				AA2CE9AA25D0089500266C54 /* AppDependencies */,
 				AA2CE99B25D0080700266C54 /* Infrastructure */,
 				AA2CE99625D007D700266C54 /* Domain */,
 				AA2CE99025D007A600266C54 /* UI */,
